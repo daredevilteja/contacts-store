@@ -1,9 +1,14 @@
 <section *ngIf="flag; else elseBlock">
-  <mat-card>
-    <mat-list>
-      <mat-list-item *ngFor="let contact of contactList"></mat-list-item>
-    </mat-list>
-  </mat-card>
+
+    <div class="contactsContainer" *ngFor="let contact of contactList">
+      <mat-card class="contactStyle">
+        <h1>{{contact.id}}</h1>
+        <h3>{{contact.name}}</h3>
+        <h3>{{contact.phNum}}</h3>
+        <h3>{{contact.email}}</h3>
+      </mat-card>
+    </div>
+
   <br/>
   <section>
     <button mat-raised-button color="primary" (click)="setFlag()">Add Contact</button>
@@ -12,22 +17,29 @@
 
 <ng-template #elseBlock>
   <form #form='ngForm' (submit)="saveContact()">
-    <mat-card-content>
+    <mat-card-content class="formContainer">
       <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
-        <input matInput placeholder="Eg. John" type="text" required name="selectedContact.name" [(ngModel)]="selectedContact.name">
+        <input matInput placeholder="Eg. John" type="text" required name="selectedContact.name"
+               [(ngModel)]="selectedContact.name">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Phone Number</mat-label>
-        <input matInput placeholder="eg. 999999999" type="number" required name="selectedContact.phNum"
+        <input matInput placeholder="eg. 999999999"
+               min="1000000000" max="9999999999" type="number" required
+               name="selectedContact.phNum"
                [(ngModel)]="selectedContact.phNum">
       </mat-form-field>
+
+      <br/>
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
-        <input matInput type="email" required name="selectedContact.email" [(ngModel)]="selectedContact.email">
+        <input matInput type="email" required name="selectedContact.email"
+               [(ngModel)]="selectedContact.email" multiple>
+
       </mat-form-field>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions style="display: flex; justify-content: center">
       <button [disabled]="form.invalid" type="submit" mat-button color="primary">Save</button>
       <button type="button" mat-button (click)="cancel()">Cancel</button>
     </mat-card-actions>
