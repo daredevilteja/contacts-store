@@ -9,6 +9,8 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'contacts-store';
   flag = true;
   contactList = [];
+  count = 0;
+  numList=[];
   selectedContact = null;
 
   constructor() {
@@ -29,7 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.selectedContact = {
       id: null,
       name: "",
-      phNum: null,
+      phNum: [],
       email: ""
     };
   }
@@ -54,5 +56,10 @@ export class AppComponent implements OnInit, OnDestroy {
   cancel() {
     this.resetSelectedContact();
     this.flag = true;
+  }
+
+  addField() {
+    this.selectedContact.phNum[this.numList.length] =
+    this.numList.push(1);
   }
 }

@@ -1,6 +1,6 @@
 <section *ngIf="flag; else elseBlock">
-
-    <div class="contactsContainer" *ngFor="let contact of contactList">
+  <div class="contactsContainer">
+    <div *ngFor="let contact of contactList">
       <mat-card class="contactStyle">
         <h1>{{contact.id}}</h1>
         <h3>{{contact.name}}</h3>
@@ -8,7 +8,7 @@
         <h3>{{contact.email}}</h3>
       </mat-card>
     </div>
-
+  </div>
   <br/>
   <section>
     <button mat-raised-button color="primary" (click)="setFlag()">Add Contact</button>
@@ -25,13 +25,14 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Phone Number</mat-label>
+        <div *ngFor="let numCount of numList">
         <input matInput placeholder="eg. 999999999"
                min="1000000000" max="9999999999" type="number" required
-               name="selectedContact.phNum"
-               [(ngModel)]="selectedContact.phNum">
+               name="selectedContact.phNum[numCount]"
+               [(ngModel)]="selectedContact.phNum[numCount]">
+        <button mat-button type="button" (click)="addField()">Add</button>
+        </div>
       </mat-form-field>
-
-      <br/>
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
         <input matInput type="email" required name="selectedContact.email"
