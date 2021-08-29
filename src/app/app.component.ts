@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,9 @@ export class AppComponent implements OnInit, OnDestroy {
   flag = true;
   contactList = [];
   count = 0;
-  numList=[];
   selectedContact = null;
+  phoneNumbersCount = 0;
+  phoneNumber = "";
 
   constructor() {
   }
@@ -58,8 +60,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.flag = true;
   }
 
-  addField() {
-    this.selectedContact.phNum[this.numList.length] =
-    this.numList.push(1);
+  addPhoneNumberField(){
+    this.selectedContact.phNum[this.phoneNumbersCount] = this.phoneNumber;
+    this.phoneNumbersCount++;
+    this.phoneNumber = "0";
   }
 }
